@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #home {
+            pointer-events: none;
+        }
+
+        tr img {
+            cursor: pointer;
+        }
+
+        .logo {
+            margin: top 10%;
+            position: relative;
+            animation-name: logoanimation;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: none;
+        }
+
+        @keyframes logoanimation {
+            0% {
+                right: 40vw;
+            }
+
+            50% {
+                right: -40vw;
+            }
+
+            80% {
+                right: 3vw;
+            }
+
+            90% {
+                right: -2vw;
+            }
+
+            95% {
+                right: 1vw;
+            }
+
+            100% {
+                right: 0;
+            }
+        }
+
+        * {
+            font-size: 1em !important;
+            color: #000 !important;
+            font-family: Arial !important;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .logo {
+            margin-left: auto;
+            margin-right: auto;
+            width: 100px;
+            height: 100px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        td {
+            font-weight: 900;
+        }
+
+        /* The navigation bar */
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: sticky;
+            /* Set the navbar to fixed position */
+            top: 0;
+            /* Position the navbar at the top of the page */
+            width: 100%;
+            /* Full width */
+        }
+
+        /* Links inside the navbar */
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change background on mouse-over */
+        .navbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        #now_showing {
+            float: left;
+        }
+    </style>
+    <script rel="javascript" type="text/javascript" src="movie.js"></script>
+</head>
+
+<body>
+    <div class="logo"><img src="image/filmreel.png" alt="City Cinema"></div>
+    <div class="navbar">
+        <a href="cw3_2204_homepage.html" target="_blank">HOME</a>
+        <a href="cw3_2204_now_showing_page.html" target="_blank">NOW
+            SHOWING</a>
+        <a href="cw3_2204_ticket.html" target="_blank">TICKET</a>
+    </div>
+    <div>
+        <div id="insvid"></div>
+        <div id="now_showing">
+            <h3>Now showing</h3>
+            <table id="up">
+            </table>
+        </div>
+        <div id="upcoming">
+            <h3>Upcoming</h3>
+            <table id="now">
+            </table>
+        </div>
+        <script type="text/javascript">
+            window.onload = init();
+            function init() {
+                var i = 0;
+                var j = 0;
+                var database = getMovies();
+                var l = database.length;
+                for (i; i < l; i++) {
+                    var mn = database[i].name;
+                    var tbn = database[i].thumbnail;
+                    var ca = database[i].cast;
+                    var di = database[i].director;
+                    var du = database[i].duration;
+                    var idd = database[i].id;
+                    var sr = database[i].src;
+                    var vid = document.createElement("video");
+                    vid.controls = "controls";
+                    vid.autoplay = "autoplay";
+                    vid.muted = "muted";
+                    vid.src = sr;
+                    document.getElementById("insvid").appendChild(vid);
+                    if (database[i].type == "now") {
+                        tr1 = document.createElement("tr");
+                        document.getElementById("up").appendChild(tr1);
+                        var td1 = document.createElement("td");
+                        td1.innerHTML = "<img src=" + tbn + " width=" + 123 + " height=" + 95 + " alt=" + mn + " onclick=\"+clickedimg(" + idd + ")\">"
+                        tr1.appendChild(td1);
+                        tr5 = document.createElement("tr");
+                        document.getElementById("up").appendChild(tr5);
+                        var td2 = document.createElement("td");
+                        td2.innerHTML = "Name: " + mn;
+                        tr5.appendChild(td2);
+                        tr2 = document.createElement("tr");
+                        document.getElementById("up").appendChild(tr2);
+                        var td3 = document.createElement("td");
+                        td3.innerHTML = "Cast: " + ca;
+                        tr2.appendChild(td3);
+                        tr3 = document.createElement("tr");
+                        document.getElementById("up").appendChild(tr3);
+                        var td4 = document.createElement("td");
+                        td4.innerHTML = "Director: " + di;
+                        tr3.appendChild(td4);
+                        tr4 = document.createElement("tr");
+                        document.getElementById("up").appendChild(tr4);
+                        var td5 = document.createElement("td");
+                        td5.innerHTML = "Duration: " + du;
+                        tr4.appendChild(td5);
+                    }
+                    else {
+                        tr6 = document.createElement("tr");
+                        document.getElementById("now").appendChild(tr6);
+                        var td6 = document.createElement("td");
+                        td6.innerHTML = "<img src=" + tbn + " width=" + 123 + " height=" + 95 + " alt=" + mn + " onclick=\"+clickedimg(" + idd + ")\">"
+                        tr6.appendChild(td6);
+                        tr7 = document.createElement("tr");
+                        document.getElementById("now").appendChild(tr7);
+                        var td7 = document.createElement("td");
+                        td7.innerHTML = "Name: " + mn;
+                        tr7.appendChild(td7);
+                        tr8 = document.createElement("tr");
+                        document.getElementById("now").appendChild(tr8);
+                        var td8 = document.createElement("td");
+                        td8.innerHTML = "Cast: " + ca;
+                        tr8.appendChild(td8);
+                        tr9 = document.createElement("tr");
+                        document.getElementById("now").appendChild(tr9);
+                        var td9 = document.createElement("td");
+                        td9.innerHTML = "Director: " + di;
+                        tr9.appendChild(td9);
+                        tr10 = document.createElement("tr");
+                        document.getElementById("now").appendChild(tr10);
+                        var td10 = document.createElement("td");
+                        td10.innerHTML = "Duration: " + du;
+                        tr10.appendChild(td10);
+                    }
+                }
+            }
+        </script>
+    </div>
+    <footer>
+        <p>Footer:@Copyright of resources belong to corresponding copyright owners-fair use for education
+            purpose |</p>
+        <a href="cw3_2204_homepage.html">Home</a>
+        <a href="cw3_designpage.html">Design</a>
+    </footer>
+    <script>
+
+        // Changing video
+        var index_video = 0;
+
+        function clickedimg(id) {
+            index_video = 0 + id - 1;
+            return slideshow_video();
+        }
+
+        slideshow_video();
+
+        function slideshow_video() {
+            var slides = document.querySelectorAll("video");
+            var i;
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            index_video++;
+            if (index_video > slides.length)
+                index_video = 1;
+            slides[index_video - 1].style.display = "block";
+            slides[index_video - 1].load();
+            slides[index_video - 1].onended = function () { setTimeout(slideshow_video, 2000); }
+        }
+
+
+    </script>
+</body>
+
+</html>

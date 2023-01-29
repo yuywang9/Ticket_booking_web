@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-size: 1em !important;
+            color: #000 !important;
+            font-family: Arial !important;
+        }
+
+        #ticket {
+            pointer-events: none;
+        }
+
+        .logo {
+            margin: top 10%;
+            position: relative;
+            animation-name: logoanimation;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: none;
+        }
+
+        @keyframes logoanimation {
+            0% {
+                right: 40vw;
+            }
+
+            50% {
+                right: -40vw;
+            }
+
+            80% {
+                right: 3vw;
+            }
+
+            90% {
+                right: -2vw;
+            }
+
+            95% {
+                right: 1vw;
+            }
+
+            100% {
+                right: 0;
+            }
+        }
+
+        .logo {
+            margin-left: auto;
+            margin-right: auto;
+            width: 100px;
+            height: 100px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        td {
+            font-weight: bold;
+        }
+
+        /* The navigation bar */
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: sticky;
+            /* Set the navbar to fixed position */
+            top: 0;
+            /* Position the navbar at the top of the page */
+            width: 100%;
+            /* Full width */
+        }
+
+        /* Links inside the navbar */
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change background on mouse-over */
+        .navbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        .seat {
+            border: none;
+
+            display: inline-block;
+
+            outline: 0;
+
+            padding: 8px 16px;
+
+            color: #fff;
+
+            background-color: #F88E8B;
+
+            text-align: center;
+
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+
+            width: 50x;
+
+        }
+
+        .seat:hover {
+            background-color: #eee;
+
+        }
+
+        #screen {
+            width: 200px;
+            text-align: center;
+        }
+
+        #header {
+            float: left;
+            height: 90px;
+            line-height: 10px;
+            width: 500px;
+        }
+    </style>
+    <script rel="javascript" type="text/javascript" src="http://courses.cs.cityu.edu.hk/cs2204/cw3/cinemas.js"></script>
+    <script rel="javascript" type="text/javascript" src="movie.js"></script>
+</head>
+
+<body onload="setup()">
+    <div class="logo"><img src="image/filmreel.png" alt="City Cinema"></div>
+    <div class="navbar">
+        <a href="cw3_2204_homepage.html" target="_blank">HOME</a>
+        <a href="cw3_2204_now_showing_page.html" target="_blank">NOW
+            SHOWING</a>
+        <a href="cw3_2204_ticket.html" target="_blank">TICKET</a>
+    </div>
+    <form>
+        <div id="header">
+        </div>
+    </form>
+    <div id="b">
+        <table>
+            <tr>
+                <td></td>
+                <td colspan="4">
+                    <div id="screen">screen</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Row A</td>
+                <td>
+                    <div class="seat" onclick="add(event,'A1')">1</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'A2')">2</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'A3')">3</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'A4')">4</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Row B</td>
+                <td>
+                    <div class="seat" onclick="add(event,'B1')">1</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'B2')">2</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'B3')">3</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'B4')">4</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Row C</td>
+                <td>
+                    <div class="seat" onclick="add(event,'C1')">1</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'C2')">2</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'C3')">3</div>
+                </td>
+                <td>
+                    <div class="seat" onclick="add(event,'C4')">4</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="book">
+        <p>Seat Booked<br>
+            <span id="seats"></span><br>
+        <form id="send">
+            <button name="tickets" type="submit" value="">Confirm</button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <footer>
+        <p>Footer:@Copyright of resources belong to corresponding copyright owners-fair use for education
+            purpose|</p>
+        <a href="cw3_2204_homepage.html">Home</a>
+        <a href="cw3_designpage.html">Design</a>
+    </footer>
+
+    <script>
+        let movies = getMovies();
+        let cinemas = getCinemas();
+        let tickets = new Array();
+        window.addEventListener('DOMContentLoaded', (event) => {
+            let query = window.location.search;
+            let data = new URLSearchParams(query);
+            let movie = movies.find(movie => movie.name == data.get("mname"))
+            let cinema = cinemas.find(cinema => cinema.branchName == data.get("cinema").replace("+", " "))
+            let _show;
+
+            for (let i = 0; i < cinema.movies.length; i++) {
+                if (cinema.movies[i].id == movie.id)
+                    for (let show of cinema.movies[i].shows) {
+                        if (show.index == data.get("showindex"))
+                            _show = show;
+                    }
+            }
+            document.getElementById("header").innerHTML =
+                ` <h5 value='${cinema.branchName}'>Cinema - ${cinema.branchName}</h5>
+        <h5 value='${movie.name}'>Movie - ${movie.name}</h5>
+        <h5 value='${_show.datetime}'>Time - ${_show.datetime}</h5>
+        <h5 value='${_show.house}'>House - ${_show.house}</h5>`;
+
+
+        });
+
+        function checkout() {
+            window.location.href = "cw3_2204_ticketpage.html" + window.location.search + "&tickets=" + tickets.join(",")
+        }
+
+        function add(e, num) {
+            if (tickets.find(e => e == num))
+                return;
+            tickets.push(num)
+            e.target.style.backgroundColor = "#ffffff"
+            document.getElementById('seats').innerText = tickets.join(", ")
+        }
+        function setup() {
+            setforms();
+            addeventhandlers();
+
+        }
+        const cinema = getCinemas();
+        var index = 0;
+        let ticket = 0;
+        function setforms() {
+            urlParams = new URLSearchParams(window.location.search);
+            index = urlParams.get('showtime');
+
+            for (let x = 0; x < cinema.length; x++)
+                for (let c = 0; c < cinema[x].movies.length; c++)
+                    for (let d = 0; d < cinema[x].movies[c].shows.length; d++)
+                        if (cinema[x].movies[c].shows[d].index == index) {
+                            console.log("found");
+                            document.getElementById('cinema').setAttribute("value", cinema[x].branchName);
+                            document.getElementById('time').setAttribute("value", cinema[x].movies[c].shows[d].datetime);
+                            document.getElementById('house').setAttribute("value", cinema[x].movies[c].shows[d].house);
+                            document.getElementById('movie').setAttribute("value", found(cinema[x].movies[c].id));
+                            break;
+                        }
+
+
+        }
+
+        function addeventhandlers() {
+            let form = document.getElementById('send');
+            form.setAttribute("method", "get");
+            form.setAttribute("action", "cw3_printpage.html");
+            form.getElementsByTagName("button")[0].setAttribute("value", index);
+            let tds = document.getElementsByTagName("td");
+
+            for (let x = 0; x < tds.length; x++) {
+                tds[x].style.cursor = "pointer";
+                tds[x].addEventListener("click", function () {
+
+                    if (tds[x].style.backgroundColor.localeCompare("yellow")) {
+
+                        tds[x].style.backgroundColor = "yellow";
+
+                        tds[x].addEventListener('mouseover', function () {
+                            tds[x].style.cursor = "default";
+                        })
+                        ticket++;
+                        form.getElementsByTagName("button")[0].setAttribute("value", form.getElementsByTagName("button")[0].value += ' ' + tds[x].getElementsByClassName('seat')[0].innerHTML);
+                    }
+
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

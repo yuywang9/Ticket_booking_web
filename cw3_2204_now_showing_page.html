@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-size: 1em !important;
+            color: #000 !important;
+            font-family: Arial !important;
+        }
+
+        #now {
+            pointer-events: none;
+        }
+
+        .logo {
+            margin-left: auto;
+            margin-right: auto;
+            width: 100px;
+            height: 100px;
+        }
+
+        .logo {
+            margin: top 10%;
+            position: relative;
+            animation-name: logoanimation;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: none;
+        }
+
+        @keyframes logoanimation {
+            0% {
+                right: 40vw;
+            }
+
+            50% {
+                right: -40vw;
+            }
+
+            80% {
+                right: 3vw;
+            }
+
+            90% {
+                right: -2vw;
+            }
+
+            95% {
+                right: 1vw;
+            }
+
+            100% {
+                right: 0;
+            }
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        td {
+            font-weight: bold;
+        }
+
+        /* The navigation bar */
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: sticky;
+            /* Set the navbar to fixed position */
+            top: 0;
+            /* Position the navbar at the top of the page */
+            width: 100%;
+            /* Full width */
+        }
+
+        /* Links inside the navbar */
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change background on mouse-over */
+        .navbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        .div2 {
+            float: left;
+            height: 400px;
+        }
+
+        fieldset {
+            width: 400px;
+            float: left;
+            margin-right: 10px;
+        }
+    </style>
+    <script rel="javascript" type="text/javascript" src="http://courses.cs.cityu.edu.hk/cs2204/cw3/cinemas.js"></script>
+    <script rel="javascript" type="text/javascript" src="movie.js"></script>
+</head>
+
+<body>
+    <div class="logo"><img src="image/filmreel.png" alt="City Cinema"></div>
+    <div class="navbar">
+        <a href="cw3_2204_homepage.html" target="_blank">HOME</a>
+        <a href="cw3_2204_now_showing_page.html" target="_blank">NOW
+            SHOWING</a>
+        <a href="cw3_2204_ticket.html" target="_blank">TICKET</a>
+    </div>
+    <div class="bigdiv">
+        <div class="div2">
+            <div class="form1">
+                Select Cinema:<select onchange="handleChange" class="cinimaselect">
+                    <!-- <option> City Cinema-Festival Walk</option>
+                    <option> Hello Cinema-Festival Walk</option>
+                    <option> Gold Cinema-Festival Walk</option>
+                    <option> Mia Coco Cinema-Festival Walk</option> -->
+                </select>
+                <div id="items">
+                    <!-- <img src="../img/barbecue.jpg" alt="nature" class="img">
+                    <p> <input type="text" name="fname" value="Nature" /></p>
+
+                    <select>
+                        <option> 19 March, Tue -9:00</option>
+                        <option> 19 March, Tue -12:00</option>
+                        <option> 19 March, Tue -14:00</option>
+                        <option> 19 March, Tue -16:00</option>
+                    </select>
+                    <div> <button type="submit" formaction="TicketPage.html" name="Nature" value="Nature"
+                            class="sunmit">
+                            Buy Ticket </button>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Cinema locations</h2>
+    <div>
+        <table>
+            <tr>
+                <td rowspan="2"><img src="image/festival_grand_cinema_location.png" alt="festival grand cinema location"
+                        height="110" width="140">
+                </td>
+                <td>
+                    <h4>festival grand cinema</h4>
+                </td>
+            </tr>
+            <tr>
+                <td> Address: 80 Tat Chee Ave, Festival Walk</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td rowspan="2"><img src="image/broadway_ciname_location.png" alt="broadway cinema location"
+                        height="110" width="140">
+                </td>
+                <td>
+                    <h4>broadway cinema</h4>
+                </td>
+            </tr>
+            <tr>
+                <td> Address: 3 Public Square St, Yau Ma Tei</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td rowspan="2"><img src="image/k11_theater_location.png" alt="k11 theater location" height="110"
+                        width="140">
+                </td>
+                <td>
+                    <h4>k11 theater</h4>
+                </td>
+            </tr>
+            <tr>
+                <td> Address: Level 4, K11 MUSEA, Victoria Dockside, 18 Salisbury Rd, Tsim Sha Tsui</td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <br>
+    <footer>
+        <p>Footer:@Copyright of resources belong to corresponding copyright owners-fair use for education
+            purpose |</p>
+        <a href="2204_cw2_homepage.html">Home</a>
+        <a href="cw3_designpage.html">Design</a>
+    </footer>
+    <script>
+        let movies = getMovies();
+        let cinemas = getCinemas();
+        let selectedDate = [];
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            let select = document.querySelector('.cinimaselect')
+
+            select.innerHTML = cinemas
+                .map((cinema) => `<option value="${cinema.branchName}">${cinema.branchName}</option>`)
+                .reduce((a, b) => a + b)
+
+            select.addEventListener('change', handleChange)
+            changeCinema(cinemas[0].branchName);
+        });
+
+        function handleChange(event) {
+            changeCinema(event.target.value);
+        }
+
+        function changeCinema(name) {
+            let cinema;
+            for (let i = 0; i < cinemas.length; i++) {
+                if (name == cinemas[i].branchName) {
+                    cinema = cinemas[i]
+                    break;
+                }
+            }
+            if (!cinema)
+                return;
+            changeMovies(cinema)
+        }
+
+        function changeMovies(cinema) {
+            let items = document.getElementById("items");
+            items.innerHTML = "";
+            console.log(cinema)
+            for (let i = 0; i < cinema.movies.length; i++) {
+                let form = document.createElement("form");
+
+                let movie = getMovie(cinema.movies[i].id)
+                console.log(movie, cinema.movies[i].id)
+                form.classList = ['block']
+                form.innerHTML = `
+                    <img src="${movie.thumbnail}" alt="opps" style="padding:5%">
+                    <p> <input type="text" name="mname" value="${movie.name}" /></p>
+                    <input type="hidden" name="cinema" value="${cinema.branchName}">
+                    <select name="showindex" onchange="dateChange(event, '${movie.id - 1}')">
+                        ${cinema.movies[i].shows.map(e => `<option value="${e.index}">${e.datetime}</option>`)}
+                    </select>
+                    <div> <button type="submit" formaction="cw3_2204_ticket.html"
+                            class="sunmit">
+                            Buy Ticket </button>
+                    </div>
+                    `;
+                selectedDate[movie.id - 1] = cinema.movies[i].shows[0].index;
+                items.appendChild(form)
+            }
+
+
+        }
+
+
+        function dateChange(ev, index) {
+            selectedDate[index] = ev.target.value;
+            console.log(selectedDate)
+
+        }
+
+        function getMovie(id) {
+            return movies.find(e => e.id == id)
+        }
+    </script>
+</body>
+
+</html>

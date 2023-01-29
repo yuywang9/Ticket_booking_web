@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Taumergenov Nurdaulet" />
+    <meta name="description" content="Print page of Kino Go" />
+    <title>Print</title>
+    <style>
+        :root {
+            --family-color: linear-gradient(136.78deg, #505add 34.4%, #be40c0 66.11%, #fba82b 96.37%);
+        }
+
+        .info {
+            padding: 10px;
+            width: 80%;
+        }
+
+        .cut {
+            display: flex;
+            width: 20%;
+            border-left: 4px dotted black;
+            border-radius: 0 10px 10px 0;
+            text-align: center;
+        }
+
+        .cut>h3 {
+            display: flex;
+            align-self: center;
+        }
+
+        .ticket {
+            display: flex;
+            clear: both;
+            font-size: 1rem;
+            border: 1px solid black;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .ticket-row {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (min-width: 24em) {
+            .ticket-row label {
+                width: 50%;
+            }
+        }
+
+        @media (min-width: 48em) {
+            .ticket-row label {
+                width: 30%;
+            }
+        }
+
+        .ticket h3 {
+            margin-top: 0;
+            width: 100%;
+        }
+
+        label {
+            color: #f60;
+            font-size: inherit;
+            font-weight: bold;
+        }
+
+        input {
+            font-size: 1.4rem;
+            font-weight: bold;
+            font-family: 'Open-sans', sans-serif;
+            color: black;
+            background: none;
+            border: 0;
+            width: 100%;
+        }
+
+
+        @media print {
+            body {
+                margin-top: 0;
+            }
+
+            nav,
+            header,
+            footer,
+            .leading-header {
+                display: none;
+            }
+
+            #pagebreak {
+                page-break-after: always;
+            }
+        }
+
+        * {
+            font-size: 1em !important;
+            color: #000 !important;
+            font-family: Arial !important;
+        }
+
+        #logo {
+            margin-left: auto;
+            margin-right: auto;
+            width: 100px;
+            height: 100px;
+        }
+
+        #logo {
+            margin: top 10%;
+            position: relative;
+            animation-name: logoanimation;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: none;
+            width: 100px;
+            height: 100px;
+        }
+
+        @keyframes logoanimation {
+            0% {
+                right: 40vw;
+            }
+
+            50% {
+                right: -40vw;
+            }
+
+            80% {
+                right: 3vw;
+            }
+
+            90% {
+                right: -2vw;
+            }
+
+            95% {
+                right: 1vw;
+            }
+
+            100% {
+                right: 0;
+            }
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        td {
+            font-weight: bold;
+        }
+
+        /* The navigation bar */
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: sticky;
+            /* Set the navbar to fixed position */
+            top: 0;
+            /* Position the navbar at the top of the page */
+            width: 100%;
+            /* Full width */
+        }
+
+        /* Links inside the navbar */
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change background on mouse-over */
+        .navbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+
+</body>
+<header>
+    <div id="logo">
+        <img id="logo_img" src="image/filmreel.png" alt="logo">
+    </div>
+</header>
+<div class="navbar">
+    <a href="cw3_2204_homepage.html" target="_blank">HOME</a>
+    <a href="cw3_2204_now_showing_page.html" target="_blank">NOW
+        SHOWING</a>
+    <a href="cw3__2204_ticket.html" target="_blank">TICKET</a>
+</div>
+
+
+<div class="container">
+    <h3 class="leading-header">Print this tickets and bring them with you</h3>
+    <div class="ticket">
+        <div class="info">
+            <h3>Ticket</h3>
+            <div class="ticket-row">
+                <label for="cinema">Cinema:</label>
+                <input type="text" name="cinema" id="cinema" value="City Cinema - Festival" disabled />
+            </div>
+            <div class="ticket-row">
+                <label for="movie">Movie:</label>
+                <input type="text" name="movie" id="movie" value="casablanca" disabled />
+            </div>
+            <div class="ticket-row">
+                <label for="datetime">Date Time:</label>
+                <input type="text" name="datetime" id="datetime" value="8 Nov, Sun - 9:00am" disabled />
+            </div>
+            <div class="ticket-row">
+                <label for="house">House No.:</label>
+                <input type="text" name="house" id="house" value="4" disabled />
+            </div>
+            <div class="ticket-row">
+                <label for="seat">Seat:</label>
+                <input type="text" name="seat" id="seat" value="B1" disabled />
+            </div>
+        </div>
+        <div class="cut">
+            <h3>Do not damage tickets</h3>
+        </div>
+    </div>
+    <div id="pagebreak"></div>
+    <div class="here">
+    </div>
+</div>
+
+</form>
+<footer>
+    <p>@Copyright of resources belong to corresponding copyright owners - for use for education purpose</p>
+    <a href="cw3_2204_homepage.html">Home</a>
+    <a href="cw3_designpage.html">Design</a>
+</footer>
+<script>
+    window.onload = setup;
+
+    function setup() {
+        urlParams = new URLSearchParams(window.location.search);
+
+        let ind = urlParams.get('tickets');
+
+        let index = ind.split(' ');
+
+        let moviename, time, house, cinemaname;
+        let cinemas = getCinemas();
+        for (let x = 0; x < cinemas.length; x++)
+            for (let c = 0; c < cinemas[x].movies.length; c++)
+                for (let d = 0; d < cinemas[x].movies[c].shows.length; d++)
+                    if (cinemas[x].movies[c].shows[d].index == index[0]) {
+                        cinemaname = cinemas[x].branchName;
+                        time = cinemas[x].movies[c].shows[d].datetime;
+                        moviename = found(cinemas[x].movies[c].id);
+                        house = cinemas[x].movies[c].shows[d].house;
+                    }
+
+        for (let x = 1; x < index.length; x++) {
+            let art = document.createElement("article");
+            art.setAttribute("class", "ticket");
+            art.innerHTML = '<h4>Ticket</h4><form><label for="cinema">Cinema: </label><input type="text" id="cinema" value="' + cinemaname + '" readonly><br><label for="time">Time: </label><input type="text" id="time" value="' + time + '" readonly><br><label for="house">House: </label> <input type="text" id="house" value="' + house + '" readonly><br><label for="movie">Movie: </label> <input type="text" id="movie" value="' + moviename + '" readonly><br><label for="seat">Seat: </label><input type="text" id="seat" value="' + index[x] + '" readonly></form>'
+            document.getElementById('here').appendChild(art);
+            document.getElementById('here').innerHTML += '<br>';
+
+        }
+    }
+</script>
+</body>
+
+</html>
